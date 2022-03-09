@@ -8,6 +8,11 @@ const QuizList = () => {
         getAllQuiz();
     },[])
 
+    const deleteQuiz= async(id)=>{
+        await axios.delete(`http://localhost:5000/${id}`);
+        getAllQuiz();
+    }
+
     const getAllQuiz= async()=>{
         const response = await axios.get('http://localhost:5000/quiz');
         console.log(response.data);
@@ -42,8 +47,8 @@ const QuizList = () => {
                 <td>{quiz.option3}</td>
                 <td>{quiz.option4}</td>
                 <td>
-                    <button className='button is-small is-info'>Edit</button>
-                    <button className='button is-small is-danger'>Delete</button>
+                    <Link to={`/edit/${quiz.id}`} className='button is-small is-info'>Edit</Link>
+                    <button onClick={()=>deleteQuiz(quiz.id)} className='button is-small is-danger'>Delete</button>
                 </td>
 
                 </tr>

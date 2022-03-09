@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import QuizList from "./components/quiz"
 import AddQuiz from "./components/addQuiz";
 import EditQuiz from "./components/editQuiz";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -10,7 +11,10 @@ function App() {
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
            <Switch>
-              <Route exact path="/">
+           <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/admin">
                 <QuizList />
               </Route>
               <Route exact path="/add">

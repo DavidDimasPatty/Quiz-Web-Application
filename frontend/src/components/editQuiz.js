@@ -12,9 +12,9 @@ const EditQuiz = () => {
     const history=useHistory();
     const {id}=useParams();
 
-    const saveQuiz = async (e)=>{
+    const UpdateQuiz = async (e)=>{
         e.preventDefault();
-        await axios.post("http://localhost:5000/create",{
+        await axios.patch(`http://localhost:5000/${id}`,{
             question:question,
             option1:option1,
             option2:option2,
@@ -35,14 +35,13 @@ const EditQuiz = () => {
         setoption2(response.data.option2);
         setoption3(response.data.option3);
         setoption4(response.data.option4);
-        history.push("/");
     }
   return (
     <div>
-            <form onSubmit={saveQuiz}>
+            <form onSubmit={UpdateQuiz}>
                 <div className='field'>
                     <label className='label'>Question</label>
-                    <input class="input"
+                    <input className="input"
                      type="text"
                      placeholder="question"
                      value={question}
@@ -51,7 +50,7 @@ const EditQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 1</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text"
                      placeholder="option 1"
                      value={option1}
@@ -60,7 +59,7 @@ const EditQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 2</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text"
                      placeholder="option 2"
                      value={option2}
@@ -69,7 +68,7 @@ const EditQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 3</label>
-                    <input class="input" type="text" 
+                    <input className="input" type="text" 
                     placeholder="option 3"
                     value={option3}
                      onChange={(e) =>setoption3(e.target.value)}
@@ -78,7 +77,7 @@ const EditQuiz = () => {
 
                 <div className='field'>
                     <label className='label'>Option 4</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text" 
                     placeholder="option 4"
                     value={option4}

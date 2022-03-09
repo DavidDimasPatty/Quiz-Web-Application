@@ -27,7 +27,7 @@ const AddQuiz = () => {
             <form onSubmit={saveQuiz}>
                 <div className='field'>
                     <label className='label'>Question</label>
-                    <input class="input"
+                    <input className="input"
                      type="text"
                      placeholder="question"
                      value={question}
@@ -36,7 +36,7 @@ const AddQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 1</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text"
                      placeholder="option 1"
                      value={option1}
@@ -45,7 +45,7 @@ const AddQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 2</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text"
                      placeholder="option 2"
                      value={option2}
@@ -54,7 +54,7 @@ const AddQuiz = () => {
                 </div>
                 <div className='field'>
                     <label className='label'>Option 3</label>
-                    <input class="input" type="text" 
+                    <input className="input" type="text" 
                     placeholder="option 3"
                     value={option3}
                      onChange={(e) =>setoption3(e.target.value)}
@@ -63,7 +63,7 @@ const AddQuiz = () => {
 
                 <div className='field'>
                     <label className='label'>Option 4</label>
-                    <input class="input" 
+                    <input className="input" 
                     type="text" 
                     placeholder="option 4"
                     value={option4}
