@@ -7,10 +7,7 @@ import Home from "./components/Home";
 function App() {
   return (
     <Router>
-    <div className="containter">
-      <div className="columns">
-        <div className="column is-half is-offset-one-quarter">
-           <Switch>
+          <Switch>
            <Route exact path="/">
                 <Home />
               </Route>
@@ -24,9 +21,7 @@ function App() {
                 <EditQuiz />
               </Route>
            </Switch>
-        </div>
-      </div> 
-    </div>
+      
     </Router>
   );
 }
