@@ -1,27 +1,19 @@
-const { MongoClient } = require('mongodb');
-// or as an es module:
-// import { MongoClient } from 'mongodb'
+const mongoose = require('mongoose');
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
+const connect = async (e)=>{ 
+await mongoose.connect('mongodb+srv://i18040:wearedead@cluster0.hw29l.mongodb.net/?retryWrites=true&w=majority',{
+    // useNewUrlParse : true,
+    // useUnifiedTopology:true,
+    // useFindAndModify:false,
+    // useCreateIndex:true
 
-// Database Name
-const dbName = 'myProject';
-
-async function main() {
-  // Use connect method to connect to the server
-  await client.connect();
-  console.log('Connected successfully to server');
-  const db = client.db(dbName);
-  const collection = db.collection('documents');
-
-  // the following code examples can be pasted here...
-
-  return 'done.';
+ }).then(()=>{
+     console.log("Database Connect")
+ }).catch(err=>{
+     console.log("Database Failed to Connect "+err)
+ })
 }
 
-main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close());
+module.exports={
+    connect:connect
+}

@@ -1,13 +1,13 @@
 const express = require('express')
 const cors = require('cors')
-
+const dbm=require('./db')
+dbm.connect()
 const PORT = process.env.PORT || 5000
 require('dotenv').config()
 const app = express()
 
 //Rate Limiting
 app.set('trust proxy', 1)
-app.use('db.js')
 // Set static folder
 app.use(express.static('public'))
 //routes
