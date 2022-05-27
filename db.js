@@ -27,11 +27,25 @@ const quizscheme = new Schema({
 
 var quiz=mongoose.model('quiz',quizscheme)
 
-const getQuiz = async (e)=>{
-    console.log(quiz.find())
+function getQuiz(){
+    return quiz.find();
+}
+
+function addQuiz(item){
+    const newData = new Schema({
+        soal: item.body.question,
+        option1: item.body.option1,
+        option2: item.body.option2,
+        option3: item.body.option3, 
+        option4: item.body.option4,
+        jawaban :item.body.option1
+       });
+    var data= new quiz(newData);
+    data.save();
 }
 
 module.exports={
     connect:connect,
-    getQuiz:getQuiz
+    getQuiz:getQuiz,
+    addQuiz:addQuiz
 }

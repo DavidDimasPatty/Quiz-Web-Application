@@ -15,9 +15,16 @@ const QuizList = () => {
     }
 
     const getAllQuiz= async()=>{
-        const response = await axios.get('http://localhost:5000/quiz');
-        console.log(response.data);
-        setQuiz(response.data);
+        await axios.get('http://localhost:5000/get').
+        then((res)=>{
+            // console.log(res)
+            // if (res.data.length!=0){
+            //     setQuiz(res.data);
+            //     }
+        }).catch((e)=>{
+            console.log("No data found")
+        });
+        
 
     }
   
