@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
-var stringcon='mongodb+srv://i18040:wearedead@cluster0.hw29l.mongodb.net/?retryWrites=true&w=majority/QuizDB'
+var stringcon='mongodb+srv://i18040:wearedead@cluster0.hw29l.mongodb.net/?retryWrites=true&w=majority'
 const conn = mongoose.createConnection(stringcon);
 const connect = async (e)=>{ 
 await mongoose.connect(stringcon,{
-    // useNewUrlParse : true,
-    // useUnifiedTopology:true,
-    // useFindAndModify:false,
-    // useCreateIndex:true
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
 
  }).then(()=>{
      console.log("Database Connect")
@@ -32,14 +30,15 @@ function getQuiz(){
 }
 
 function addQuiz(item){
-    const newData = new Schema({
+    console.log(item.body)
+    const newData = {
         soal: item.body.question,
         option1: item.body.option1,
         option2: item.body.option2,
         option3: item.body.option3, 
         option4: item.body.option4,
         jawaban :item.body.option1
-       });
+    }
     var data= new quiz(newData);
     data.save();
 }

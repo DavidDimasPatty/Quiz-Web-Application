@@ -12,7 +12,7 @@ const AddQuiz = () => {
     const history=useHistory();
 
     const saveQuiz = async (e)=>{
-        
+        e.preventDefault();
         await axios.post("http://localhost:5000/add",{
             question:question,
             option1:option1,
