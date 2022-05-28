@@ -86,6 +86,21 @@ function addQuiz(item){
     data.save();
 }
 
+function addScore(item){
+    console.log(item.body)
+    const newData = {
+        name : item.body.name,
+        score: item.body.score,
+        timeTaken: item.body.time,
+        time: item.body.time,
+        category: item.body.category
+    
+    }
+    var data= new score(newData);
+    data.save();
+}
+
+
 function deleteQuiz(item){
  quiz.findByIdAndRemove(item).exec();
 }
@@ -94,11 +109,26 @@ async function getOneQuiz(item){
     var arr=[]
     await quiz.findById(item).then((res)=>{
        arr=res;
-       console.log(arr)
-   }).catch((e)=>{
+    }).catch((e)=>{
        console.log(e)
    })
    return arr
+}
+
+async function getOneQuizCategory(item){
+    var arr=[]
+    
+  await  quiz.findOne({
+        $or: [
+            {category: item}, 
+        ]
+    }).then((res)=>{
+        arr=res;
+        console.log(arr)
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return arr
 }
 
 async function updateQuiz(item){
@@ -117,7 +147,9 @@ module.exports={
     getScore:getScore,
     getCategory:getCategory,
     addQuiz:addQuiz,
+    addScore:addScore,
     deleteQuiz:deleteQuiz,
     getOneQuiz:getOneQuiz,
-    updateQuiz:updateQuiz
+    updateQuiz:updateQuiz,
+    getOneQuizCategory:getOneQuizCategory
 }

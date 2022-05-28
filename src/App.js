@@ -5,6 +5,8 @@ import EditQuiz from "./components/editQuiz";
 import Home from "./components/Home";
 import Score  from "./components/score";
 import Category from "./components/category";
+import Play from "./components/play";
+import EndQuiz from "./components/end";
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
               </Route>
               <Route exact path="/edit/:id">
                 <EditQuiz />
+              </Route>
+              <Route exact path="/play/:id">
+                <Play/>
+              </Route>
+              <Route exact path="/end/:id">
+                <EndQuiz/>
               </Route>
            </Switch>
       

@@ -1,7 +1,9 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import './home.css';
+import { ReactSession }  from 'react-client-session';
 
+ReactSession.set("score", 0);  
 function Home() {
   return ( 
       <body>

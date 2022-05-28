@@ -41,7 +41,7 @@ const Category = () => {
            <div className='columns is-centered mt-5'>     
              
                 { category.map((category,index)=>(
-                  <button /* onClick={()=>deleteQuiz(quiz._id)} */ className='button is-medium is-danger mr-2' value={index+1} >{category.name}</button>
+                  <button  onClick={()=>window.location.href='/play/'+category._id}  className='button is-medium is-danger mr-2' value={index+1} >{category.name}</button>
                  ))}
           </div>
           </p> 

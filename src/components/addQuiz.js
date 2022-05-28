@@ -1,5 +1,4 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useHistory} from 'react-router-dom';
 
@@ -9,8 +8,12 @@ const AddQuiz = () => {
     const [option2, setoption2]=useState('');
     const [option3, setoption3]=useState('');
     const [option4, setoption4]=useState('');
+    const [answer, setAnswer]=useState('');
+    const [category, setCategory]=useState([]);
     const history=useHistory();
-
+    useEffect(()=>{
+        getAllCategory();
+    },[])
     const saveQuiz = async ()=>{
       
         await axios.post("http://localhost:5000/add",{
@@ -21,6 +24,19 @@ const AddQuiz = () => {
             option4:option4
         }).then( window.location.href="/admin")
     }
+
+    const getAllCategory= async()=>{
+        await axios.get('http://localhost:5000/getallcategory').
+        then((res)=>{
+             console.log(res.data)
+             if (res.data.length!=0){
+                setCategory(res.data);
+                }
+        }).catch((e)=>{
+           // window.location.reload();
+        });
+    }
+
   return (
     <div>
             <form onSubmit={saveQuiz} action="/admin">
@@ -68,6 +84,24 @@ const AddQuiz = () => {
                     value={option4}
                      onChange={(e) =>setoption4(e.target.value)}
                     ></input>
+                </div>
+
+                <div className='field'>
+                    <label className='label'>Answer</label>
+                    <input className="input" 
+                    type="text" 
+                    placeholder="Answer"
+                    value={answer}
+                     onChange={(e) =>setAnswer(e.target.value)}
+                    ></input>
+                </div>
+
+                <div className='field'>
+                    <label className='label'>Category</label>
+                    <select>
+                        <option>Select dropdown</option>
+                        <option>With options</option>
+                    </select>
                 </div>
 
                 <div className='field'>

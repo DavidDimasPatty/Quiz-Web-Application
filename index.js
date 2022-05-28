@@ -27,8 +27,19 @@ dbm.getQuiz().then((result)=>{
 })
 })
 
+app.get('/getallcategory',function(req,res){
+  console.log("panggil");
+  dbm.getAllCategory().then((result)=>{
+      res.send(result)
+  })
+  })
+  
 app.post('/add',function(req,res){
   dbm.addQuiz(req)
+})
+
+app.post('/addscore',function(req,res){
+  dbm.addScore(req)
 })
 
 app.delete('/delete',function(req,res){
@@ -48,7 +59,16 @@ app.get('/getid',function(req,res){
         res.send(result)
     })
     })
- 
+
+    
+app.get('/getquizc',function(req,res){
+     
+      dbm.getOneQuizCategory(req.query.idc).then((result)=>{
+         console.log(result)
+          res.send(result)
+      })
+})
+
 app.get('/getscore',function(req,res){
       console.log("panggil");
       dbm.getScore().then((result)=>{
