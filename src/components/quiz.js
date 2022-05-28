@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import './quiz.css';
 
 const QuizList = () => {
     const [quiz,setQuiz]=useState([]);
+    const history = useHistory();
     useEffect(()=>{
         getAllQuiz();
     },[])
 
     const deleteQuiz= async(id)=>{
-        await axios.delete(`http://localhost:5000/${id}`);
-        getAllQuiz();
+        await axios.delete(`http://localhost:5000/delete`,{
+               data:{ 
+                   id:id
+                },
+         }).then( window.location.href="/admin")
     }
 
     const getAllQuiz= async()=>{
         await axios.get('http://localhost:5000/get').
         then((res)=>{
-            // console.log(res)
-            // if (res.data.length!=0){
-            //     setQuiz(res.data);
-            //     }
+             console.log(res.data)
+             if (res.data.length!=0){
+                setQuiz(res.data);
+                }
         }).catch((e)=>{
-            console.log("No data found")
+            window.location.reload();
         });
         
 
@@ -46,17 +51,17 @@ const QuizList = () => {
             </thead>
             <tbody>
                 { quiz.map((quiz,index)=>(
-                <tr key={quiz.id}>
+                <tr key={quiz._id}>
                 <td>{index+1}</td>
-                <td>{quiz.id_question}</td>
-                <td>{quiz.question}</td>
+                <td>{quiz._id}</td>
+                <td>{quiz.soal}</td>
                 <td>{quiz.option1}</td>
                 <td>{quiz.option2}</td>
                 <td>{quiz.option3}</td>
                 <td>{quiz.option4}</td>
                 <td>
-                    <Link to={`/edit/${quiz.id}`} className='button is-small is-info'>Edit</Link>
-                    <button onClick={()=>deleteQuiz(quiz.id)} className='button is-small is-danger'>Delete</button>
+                    <Link to={`/edit/${quiz._id}`} className='button is-small is-info'>Edit</Link>
+                    <button onClick={()=>deleteQuiz(quiz._id)} className='button is-small is-danger'>Delete</button>
                 </td>
 
                 </tr>

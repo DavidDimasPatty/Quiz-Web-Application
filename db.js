@@ -25,8 +25,14 @@ const quizscheme = new Schema({
 
 var quiz=mongoose.model('quiz',quizscheme)
 
-function getQuiz(){
-    return quiz.find();
+async function getQuiz(){
+    var arr=[]
+     await quiz.find().then((res)=>{
+        arr=res;
+    }).catch((e)=>{
+        console.log(e)
+    })
+    return arr
 }
 
 function addQuiz(item){
@@ -43,8 +49,36 @@ function addQuiz(item){
     data.save();
 }
 
+function deleteQuiz(item){
+ quiz.findByIdAndRemove(item).exec();
+}
+
+async function getOneQuiz(item){
+    var arr=[]
+    await quiz.findById(item).then((res)=>{
+       arr=res;
+       console.log(arr)
+   }).catch((e)=>{
+       console.log(e)
+   })
+   return arr
+}
+
+async function updateQuiz(item){
+    console.log(item)
+    await quiz.updateOne(
+        { _id: item.id },
+        { $set: { soal: item.question ,option1: item.option1,option2: item.option2,option3: item.option3,option4: item.option4 } },
+        { upsert: true } // Make this update into an upsert
+      );
+}
+
+
 module.exports={
     connect:connect,
     getQuiz:getQuiz,
-    addQuiz:addQuiz
+    addQuiz:addQuiz,
+    deleteQuiz:deleteQuiz,
+    getOneQuiz:getOneQuiz,
+    updateQuiz:updateQuiz
 }

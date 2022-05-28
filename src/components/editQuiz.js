@@ -14,14 +14,17 @@ const EditQuiz = () => {
 
     const UpdateQuiz = async (e)=>{
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/${id}`,{
-            question:question,
-            option1:option1,
-            option2:option2,
-            option3:option3,
-            option4:option4
-        })
-        history.push("/");
+        await axios.patch(`http://localhost:5000/update`,{
+        
+            data:{
+                id:id,
+                question:question,
+                option1:option1,
+                option2:option2,
+                option3:option3,
+                option4:option4
+            }
+        }).then( window.location.href="/admin");
     }
 
     useEffect(()=>{
@@ -29,12 +32,19 @@ const EditQuiz = () => {
     },[]);
 
     const getIdQuiz = async ()=>{
-        const response= await axios.get(`http://localhost:5000/${id}`);
-        setQuestion(response.data.question);
-        setoption1(response.data.option1);
-        setoption2(response.data.option2);
-        setoption3(response.data.option3);
-        setoption4(response.data.option4);
+        console.log(id)
+        await axios.get(`http://localhost:5000/getid`,{
+            params:{
+                id:id
+            }
+        }).then((response)=>{
+            setQuestion(response.data.soal);
+            setoption1(response.data.option1);
+            setoption2(response.data.option2);
+            setoption3(response.data.option3);
+            setoption4(response.data.option4);
+        });
+        
     }
   return (
     <div>

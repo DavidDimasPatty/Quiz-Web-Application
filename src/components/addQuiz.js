@@ -11,22 +11,19 @@ const AddQuiz = () => {
     const [option4, setoption4]=useState('');
     const history=useHistory();
 
-    const saveQuiz = async (e)=>{
-        e.preventDefault();
+    const saveQuiz = async ()=>{
+      
         await axios.post("http://localhost:5000/add",{
             question:question,
             option1:option1,
             option2:option2,
             option3:option3,
             option4:option4
-        }).then(
-          
-        )
-        history.push("/");
+        }).then( window.location.href="/admin")
     }
   return (
     <div>
-            <form onSubmit={saveQuiz}>
+            <form onSubmit={saveQuiz} action="/admin">
                 <div className='field'>
                     <label className='label'>Question</label>
                     <input className="input"

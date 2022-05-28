@@ -18,15 +18,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 dbm.connect()
+
+//router
 app.get('/get',function(req,res){
 console.log("panggil");
-const arr=dbm.getQuiz()
-res.send(CircularJSON.stringify(arr))
+dbm.getQuiz().then((result)=>{
+    res.send(result)
+})
 })
 
 app.post('/add',function(req,res){
   dbm.addQuiz(req)
 })
+
+app.delete('/delete',function(req,res){
+     console.log(req.body.id)
+    dbm.deleteQuiz(req.body.id)
+  })
+ 
+app.patch('/update',function(req,res){
+    console.log(req.body.data)
+   dbm.updateQuiz(req.body.data)
+ })
+
+app.get('/getid',function(req,res){
+    console.log("panggil");
+    console.log(req.query)
+    dbm.getOneQuiz(req.query.id).then((result)=>{
+        res.send(result)
+    })
+    })
 
 //Rate Limiting
 app.set('trust proxy', 1)
