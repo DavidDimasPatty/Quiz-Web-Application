@@ -24,7 +24,8 @@ const Category = () => {
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){
-                setQuiz(res.data);
+                setCategory(res.data);
+                console.log(res.data)
                 }
         }).catch((e)=>{
             //window.location.reload();
@@ -35,15 +36,18 @@ const Category = () => {
   
     return (
       <div>    
-       
-                { category.map((category,index)=>(
-               
-                    <button /* onClick={()=>deleteQuiz(quiz._id)} */ className='button is-small is-danger' value={category.name}></button>
+
+          <p>
+           <div className='columns is-centered mt-5'>     
              
-                ))}
+                { category.map((category,index)=>(
+                  <button /* onClick={()=>deleteQuiz(quiz._id)} */ className='button is-medium is-danger mr-2' value={index+1} >{category.name}</button>
+                 ))}
+          </div>
+          </p> 
                 
           
-    </div>
+      </div>
   )
 }
 

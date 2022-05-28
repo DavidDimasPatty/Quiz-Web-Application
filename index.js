@@ -56,6 +56,13 @@ app.get('/getscore',function(req,res){
       })
 })
 
+app.get('/getcategory',function(req,res){
+  console.log("panggil");
+  dbm.getCategory().then((result)=>{
+      res.send(result)
+  })
+})
+
 //Rate Limiting
 app.set('trust proxy', 1)
 // Set static folder

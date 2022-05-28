@@ -3,6 +3,7 @@ html{
     background-image:url('https://media.giphy.com/media/Xp6qE1gdIV4jZnwkAR/giphy-downsized-large.gif'); 
     background-repeat:repeat;
     background-size: cover; 
+    size:100%
 }
 h1{
     text-align: center;

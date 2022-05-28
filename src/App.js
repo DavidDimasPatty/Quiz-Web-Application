@@ -4,6 +4,7 @@ import AddQuiz from "./components/addQuiz";
 import EditQuiz from "./components/editQuiz";
 import Home from "./components/Home";
 import Score  from "./components/score";
+import Category from "./components/category";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
               </Route>
               <Route exact path="/add">
                 <AddQuiz />
+              </Route>
+              <Route exact path="/category">
+                <Category />
               </Route>
               <Route exact path="/edit/:id">
                 <EditQuiz />
