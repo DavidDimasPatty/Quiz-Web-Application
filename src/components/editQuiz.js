@@ -9,6 +9,9 @@ const EditQuiz = () => {
     const [option2, setoption2]=useState('');
     const [option3, setoption3]=useState('');
     const [option4, setoption4]=useState('');
+    const [answer, setAnswer]=useState('');
+    const [category, setCategory]=useState([]);
+    const [category2, setCategory2]=useState("");
     const history=useHistory();
     const {id}=useParams();
 
@@ -22,13 +25,16 @@ const EditQuiz = () => {
                 option1:option1,
                 option2:option2,
                 option3:option3,
-                option4:option4
+                option4:option4,
+                answer:answer,
+                category:category2
             }
         }).then( window.location.href="/admin");
     }
 
     useEffect(()=>{
         getIdQuiz();
+        getAllCategory();
     },[]);
 
     const getIdQuiz = async ()=>{
@@ -43,9 +49,24 @@ const EditQuiz = () => {
             setoption2(response.data.option2);
             setoption3(response.data.option3);
             setoption4(response.data.option4);
+            setAnswer(response.data.jawaban);
+            setCategory2(response.data.category);
         });
         
     }
+
+    const getAllCategory= async()=>{
+        await axios.get('http://localhost:5000/getallcategory').
+        then((res)=>{
+             console.log(res.data)
+             if (res.data.length!=0){
+                setCategory(res.data);
+                }
+        }).catch((e)=>{
+           // window.location.reload();
+        });
+    }
+
   return (
     <div>
             <form onSubmit={UpdateQuiz}>
@@ -96,11 +117,33 @@ const EditQuiz = () => {
                 </div>
 
                 <div className='field'>
+                    <label className='label'>Answer</label>
+                    <input className="input" 
+                    type="text" 
+                    placeholder="Answer"
+                    value={answer}
+                     onChange={(e) =>setAnswer(e.target.value)}
+                    ></input>
+                </div>
+
+                <div className='field'>
+                    <label className='label'>Category</label>
+                    <select  onChange={(e) =>setCategory2(e.target.value)} > 
+                   
+                    { category.map((category,key)=>(
+                        <option value={category._id} selected={(category2=== category._id) ? true : false} >{category.name}</option>
+                     ))}
+                      
+                    </select>
+                </div>
+
+                <div className='field'>
                         <button className='button is-primary'>Update</button>
                  </div>
             </form>
-            {question} - {option1} -{option2} -{option3} - {option4}
+          
     </div>
+    
   )
 }
 

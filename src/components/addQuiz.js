@@ -10,6 +10,7 @@ const AddQuiz = () => {
     const [option4, setoption4]=useState('');
     const [answer, setAnswer]=useState('');
     const [category, setCategory]=useState([]);
+    const [category2, setCategory2]=useState("");
     const history=useHistory();
     useEffect(()=>{
         getAllCategory();
@@ -21,7 +22,9 @@ const AddQuiz = () => {
             option1:option1,
             option2:option2,
             option3:option3,
-            option4:option4
+            option4:option4,
+            answer:answer,
+            category:category2
         }).then( window.location.href="/admin")
     }
 
@@ -98,9 +101,14 @@ const AddQuiz = () => {
 
                 <div className='field'>
                     <label className='label'>Category</label>
-                    <select>
-                        <option>Select dropdown</option>
-                        <option>With options</option>
+                    <select  defaultValue={"Select Categories"} onChange={(e) =>setCategory2(e.target.value)} > 
+                    <option value="default" disabled hidden selected>
+                        Select categories
+                        </option>
+                    { category.map((category,key)=>(
+                        <option value={category._id} >{category.name}</option>
+                        ))}
+                      
                     </select>
                 </div>
 
@@ -108,7 +116,7 @@ const AddQuiz = () => {
                         <button className='button is-primary'>Save</button>
                  </div>
             </form>
-            {question} - {option1} -{option2} -{option3} - {option4}
+            {category2}
     </div>
   )
 }

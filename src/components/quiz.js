@@ -46,6 +46,8 @@ const QuizList = () => {
                     <th>Option2</th>
                     <th>Option3</th>
                     <th>Option4</th>
+                    <th>Answer</th>
+                    <th>Category</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -59,6 +61,8 @@ const QuizList = () => {
                 <td>{quiz.option2}</td>
                 <td>{quiz.option3}</td>
                 <td>{quiz.option4}</td>
+                <td>{quiz.jawaban}</td>
+                <td>{quiz.category}</td>
                 <td>
                     <Link to={`/edit/${quiz._id}`} className='button is-small is-info'>Edit</Link>
                     <button onClick={()=>deleteQuiz(quiz._id)} className='button is-small is-danger'>Delete</button>

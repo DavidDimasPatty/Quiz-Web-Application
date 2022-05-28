@@ -52,6 +52,17 @@ async function getQuiz(){
     return arr
 }
 
+async function getAllCategory(){
+    var arr=[]
+     await category.find().then((res)=>{
+        arr=res;
+    }).catch((e)=>{
+        console.log(e)
+    })
+    return arr
+}
+
+
 async function getScore(){
     var arr=[]
      await score.find().then((res)=>{
@@ -80,7 +91,8 @@ function addQuiz(item){
         option2: item.body.option2,
         option3: item.body.option3, 
         option4: item.body.option4,
-        jawaban :item.body.option1
+        jawaban :item.body.answer,
+        category: item.body.category
     }
     var data= new quiz(newData);
     data.save();
@@ -135,7 +147,7 @@ async function updateQuiz(item){
     console.log(item)
     await quiz.updateOne(
         { _id: item.id },
-        { $set: { soal: item.question ,option1: item.option1,option2: item.option2,option3: item.option3,option4: item.option4 } },
+        { $set: { soal: item.question ,option1: item.option1,option2: item.option2,option3: item.option3,option4: item.option4, jawaban:item.answer,category:item.category } },
         { upsert: true } // Make this update into an upsert
       );
 }
@@ -151,5 +163,6 @@ module.exports={
     deleteQuiz:deleteQuiz,
     getOneQuiz:getOneQuiz,
     updateQuiz:updateQuiz,
-    getOneQuizCategory:getOneQuizCategory
+    getOneQuizCategory:getOneQuizCategory,
+    getAllCategory:getAllCategory
 }
