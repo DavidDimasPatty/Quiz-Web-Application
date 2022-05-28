@@ -48,6 +48,13 @@ app.get('/getid',function(req,res){
         res.send(result)
     })
     })
+ 
+app.get('/getscore',function(req,res){
+      console.log("panggil");
+      dbm.getScore().then((result)=>{
+          res.send(result)
+      })
+})
 
 //Rate Limiting
 app.set('trust proxy', 1)

@@ -3,6 +3,7 @@ import QuizList from "./components/quiz"
 import AddQuiz from "./components/addQuiz";
 import EditQuiz from "./components/editQuiz";
 import Home from "./components/Home";
+import Score  from "./components/score";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
               </Route>
               <Route exact path="/admin">
                 <QuizList />
+              </Route>
+              <Route exact path="/scoreboard">
+                <Score/>
               </Route>
               <Route exact path="/add">
                 <AddQuiz />

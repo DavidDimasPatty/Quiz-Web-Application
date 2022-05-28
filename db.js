@@ -20,14 +20,51 @@ const quizscheme = new Schema({
      option2: String,
      option3: String, 
      option4: String,
-     jawaban :String
+     jawaban :String,
+     category:String
     },{collection:'quiz'});
 
+const scorescheme = new Schema({
+        name : String,
+        score: String,
+        timeTaken: String,
+        time: String,
+        category: String
+       },{collection:'score'});
+
+const categorycheme = new Schema({
+        name : String
+},{collection:'category'});
+
 var quiz=mongoose.model('quiz',quizscheme)
+
+var score=mongoose.model('score',scorescheme)
+
+var category=mongoose.model('category',categorycheme)
 
 async function getQuiz(){
     var arr=[]
      await quiz.find().then((res)=>{
+        arr=res;
+    }).catch((e)=>{
+        console.log(e)
+    })
+    return arr
+}
+
+async function getScore(){
+    var arr=[]
+     await score.find().then((res)=>{
+        arr=res;
+    }).catch((e)=>{
+        console.log(e)
+    })
+    return arr
+}
+
+async function getCategory(){
+    var arr=[]
+     await category.find().then((res)=>{
         arr=res;
     }).catch((e)=>{
         console.log(e)
@@ -77,6 +114,8 @@ async function updateQuiz(item){
 module.exports={
     connect:connect,
     getQuiz:getQuiz,
+    getScore:getScore,
+    getCategory:getCategory,
     addQuiz:addQuiz,
     deleteQuiz:deleteQuiz,
     getOneQuiz:getOneQuiz,
