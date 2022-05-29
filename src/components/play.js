@@ -5,19 +5,29 @@ import {Link} from "react-router-dom";
 import { ReactSession }  from 'react-client-session';
 
 const Play= () => {
-    
+    const [score,setScore]=useState('');
     const [quiz,setQuiz]=useState([]);
     const history = useHistory();
     const {id,idus,ques}=useParams();
+    var scoreFinal=0;
     useEffect(()=>{
+        checkTenQuiz();
+        redirect();
         getIdQuiz();
     },[])
+
+    function checkTenQuiz() {
+        if (ques==10){
+            window.location.href=`/result/${id}/${idus}`
+        }
+    }
 
  
     const getIdQuiz= async()=>{
         await axios.get(`http://localhost:5000/getquizc`,{
             params:{
-                idc:id
+                idc:id,
+                q:ques
             }
         }).
         then((res)=>{
@@ -29,16 +39,36 @@ const Play= () => {
 
         });
     }
+    
+    const redirect = async ()=>{
+      
+        await axios.get("http://localhost:5000/getiduser",{
+            
+        }).then((res)=>{
+          setScore(res.data[0].score)
+        })  
+            
+    }
+
+    const UpdateScore = async (e)=>{
+     
+        await axios.patch(`http://localhost:5000/updatescore`,{
+        
+            data:{
+                id:idus,
+                score:scoreFinal
+            }
+        }).then(   window.location.href=`/play/${id}/${idus}/${parseInt(ques)+1}`);
+    }
+
 
     function change(pilih,ans) {
         if(pilih==ans){
-            var scoretemp= ReactSession.get("score")+10;
-            ReactSession.set("score", scoretemp);
-            console.log( ReactSession.get("score"))
-            window.location.href=`/play/${id}/${idus}/${ques}`
+           scoreFinal =parseInt(score)+10
+           UpdateScore()
         }
         else{
-            window.location.href=`/play/${id}/${idus}/${ques}`
+            window.location.href=`/play/${id}/${idus}/${parseInt(ques)+1}`
         }
     }
 

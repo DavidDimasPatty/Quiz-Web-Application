@@ -143,7 +143,23 @@ async function getOneQuizCategory(item){
     
   await  quiz.findOne({
         $or: [
-            {category: item}, 
+            {category: item.idc}, 
+        ]
+    }).skip(item.q).then((res)=>{
+        arr=res;
+        console.log(arr)
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return arr
+}
+
+async function getScoreUser(item){
+    var arr=[]
+    
+  await  score.findOne({
+        $or: [
+            {_id: item.id}, 
         ]
     }).then((res)=>{
         arr=res;
@@ -155,10 +171,17 @@ async function getOneQuizCategory(item){
 }
 
 async function updateQuiz(item){
-    console.log(item)
     await quiz.updateOne(
         { _id: item.id },
         { $set: { soal: item.question ,option1: item.option1,option2: item.option2,option3: item.option3,option4: item.option4, jawaban:item.answer,category:item.category } },
+        { upsert: true } // Make this update into an upsert
+      );
+}
+
+async function updateScore(item){
+    await score.updateOne(
+        { _id: item.id },
+        { $set: { score: item.score } },
         { upsert: true } // Make this update into an upsert
       );
 }
@@ -174,7 +197,9 @@ module.exports={
     deleteQuiz:deleteQuiz,
     getOneQuiz:getOneQuiz,
     updateQuiz:updateQuiz,
+    updateScore:updateScore,
     getOneQuizCategory:getOneQuizCategory,
     getAllCategory:getAllCategory,
-    getIdUser:getIdUser
+    getIdUser:getIdUser,
+    getScoreUser:getScoreUser
 }

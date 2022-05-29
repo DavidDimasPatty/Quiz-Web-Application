@@ -59,6 +59,11 @@ app.patch('/update',function(req,res){
    dbm.updateQuiz(req.body.data)
  })
 
+ app.patch('/updatescore',function(req,res){
+  console.log(req.body.data)
+ dbm.updateScore(req.body.data)
+})
+
 app.get('/getid',function(req,res){
     console.log("panggil");
     console.log(req.query)
@@ -70,10 +75,18 @@ app.get('/getid',function(req,res){
     
 app.get('/getquizc',function(req,res){
      
-      dbm.getOneQuizCategory(req.query.idc).then((result)=>{
+      dbm.getOneQuizCategory(req.query).then((result)=>{
          console.log(result)
           res.send(result)
       })
+})
+
+app.get('/getscoreuser',function(req,res){
+     
+  dbm.getScoreUser(req.query).then((result)=>{
+     console.log(result)
+      res.send(result)
+  })
 })
 
 app.get('/getscore',function(req,res){

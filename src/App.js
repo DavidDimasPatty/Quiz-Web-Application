@@ -7,6 +7,7 @@ import Score  from "./components/score";
 import Category from "./components/category";
 import Play from "./components/play";
 import EndQuiz from "./components/end";
+import Result from "./components/result";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
               </Route>
               <Route exact path="/play/:id/:idus/:ques">
                 <Play/>
+              </Route>
+              <Route exact path="/result/:id/:idus">
+                <Result/>
               </Route>
               <Route exact path="/end/:id">
                 <EndQuiz/>
