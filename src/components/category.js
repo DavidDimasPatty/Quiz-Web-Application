@@ -7,7 +7,6 @@ import { ReactSession }  from 'react-client-session';
 
 
 const Category = () => {
-    console.log(ReactSession.get("score")); 
     const [category,setCategory]=useState([]);
     const history = useHistory();
     useEffect(()=>{
@@ -36,7 +35,7 @@ const Category = () => {
            <div className='columns is-centered mt-5'>     
              
                 { category.map((category,index)=>(
-                  <button  onClick={()=>window.location.href='/play/'+category._id}  className='button is-medium is-danger mr-2' value={index+1} >{category.name}</button>
+                  <button  onClick={()=>window.location.href='/end/'+category._id}  className='button is-medium is-danger mr-2' value={index+1} >{category.name}</button>
                  ))}
           </div>
           </p> 

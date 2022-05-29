@@ -5,6 +5,7 @@ import { ReactSession }  from 'react-client-session';
 
 
 function Home() {
+  ReactSession.setStoreType("localStorage");
   ReactSession.set("score", "0"); 
   console.log(ReactSession.get("score")); 
   return ( 

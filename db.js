@@ -63,6 +63,17 @@ async function getAllCategory(){
 }
 
 
+async function getIdUser(){
+    var arr=[]
+     await score.find().sort({ _id: -1 }).limit(1).then((res)=>{
+        
+        arr=res;
+    }).catch((e)=>{
+        console.log(e)
+    })
+    return arr
+}
+
 async function getScore(){
     var arr=[]
      await score.find().then((res)=>{
@@ -164,5 +175,6 @@ module.exports={
     getOneQuiz:getOneQuiz,
     updateQuiz:updateQuiz,
     getOneQuizCategory:getOneQuizCategory,
-    getAllCategory:getAllCategory
+    getAllCategory:getAllCategory,
+    getIdUser:getIdUser
 }

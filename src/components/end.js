@@ -8,20 +8,35 @@ const EndQuiz = () => {
     const [name, setName]=useState('');
     const history=useHistory();
     const {id}=useParams();
-    console.log( ReactSession.get("score"))
+
     const saveScore = async ()=>{
       
         await axios.post("http://localhost:5000/addscore",{
             name:name,
-            score:ReactSession.get("score"),
+            score:0,
             time:Date.now(),
             category:id
             
-        }).then(  window.location.href="/" )
+        }).then(  
+          redirect()
+        )
     }
+
+    const redirect = async ()=>{
+      
+      await axios.get("http://localhost:5000/getiduser",{
+          
+      }).then((res)=>{
+        console.log(res.data[0]._id);
+        window.location.href=`/play/${id}/${res.data[0]._id}/1`
+      })  
+          
+  }
+
+
   return (
     <div className='buttons'>
-            <form onSubmit={saveScore} action="/">
+            
                 <div className='field'>
                     <label className='label' style={{color:"white"}}>Insert Your Name</label>
                     <input className="input"
@@ -33,9 +48,9 @@ const EndQuiz = () => {
                 </div>
                 
 
-                        <button className='button is-primary'>Save</button>
+                        <button className='button is-primary' onClick={saveScore}>Save</button>
                 
-            </form>
+          
        
     </div>
   )

@@ -5,16 +5,16 @@ import {Link} from "react-router-dom";
 import { ReactSession }  from 'react-client-session';
 
 const Play= () => {
+    
     const [quiz,setQuiz]=useState([]);
     const history = useHistory();
-    const {id}=useParams();
+    const {id,idus,ques}=useParams();
     useEffect(()=>{
         getIdQuiz();
     },[])
 
  
     const getIdQuiz= async()=>{
-        console.log(ReactSession.get("score"));
         await axios.get(`http://localhost:5000/getquizc`,{
             params:{
                 idc:id
@@ -35,10 +35,10 @@ const Play= () => {
             var scoretemp= ReactSession.get("score")+10;
             ReactSession.set("score", scoretemp);
             console.log( ReactSession.get("score"))
-            //window.location.href=`/end/${id}`
+            window.location.href=`/play/${id}/${idus}/${ques}`
         }
         else{
-           // window.location.href=`/end/${id}`
+            window.location.href=`/play/${id}/${idus}/${ques}`
         }
     }
 

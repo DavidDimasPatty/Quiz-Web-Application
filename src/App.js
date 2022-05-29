@@ -30,7 +30,7 @@ function App() {
               <Route exact path="/edit/:id">
                 <EditQuiz />
               </Route>
-              <Route exact path="/play/:id">
+              <Route exact path="/play/:id/:idus/:ques">
                 <Play/>
               </Route>
               <Route exact path="/end/:id">

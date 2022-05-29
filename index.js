@@ -33,6 +33,13 @@ app.get('/getallcategory',function(req,res){
       res.send(result)
   })
   })
+
+app.get('/getiduser',function(req,res){
+    console.log("panggil");
+    dbm.getIdUser().then((result)=>{
+        res.send(result)
+    })
+    }) 
   
 app.post('/add',function(req,res){
   dbm.addQuiz(req)
