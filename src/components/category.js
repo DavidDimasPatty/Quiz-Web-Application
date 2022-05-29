@@ -3,21 +3,16 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import './quiz.css';
+import { ReactSession }  from 'react-client-session';
+
 
 const Category = () => {
+    console.log(ReactSession.get("score")); 
     const [category,setCategory]=useState([]);
     const history = useHistory();
     useEffect(()=>{
         getAllCategory();
     },[])
-
-    const deleteQuiz= async(id)=>{
-        await axios.delete(`http://localhost:5000/delete`,{
-               data:{ 
-                   id:id
-                },
-         }).then( window.location.href="/admin")
-    }
 
     const getAllCategory= async()=>{
         await axios.get('http://localhost:5000/getcategory').

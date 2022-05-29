@@ -14,7 +14,7 @@ const Play= () => {
 
  
     const getIdQuiz= async()=>{
-       
+        console.log(ReactSession.get("score"));
         await axios.get(`http://localhost:5000/getquizc`,{
             params:{
                 idc:id
@@ -34,10 +34,11 @@ const Play= () => {
         if(pilih==ans){
             var scoretemp= ReactSession.get("score")+10;
             ReactSession.set("score", scoretemp);
-            window.location.href=`/end/${id}`
+            console.log( ReactSession.get("score"))
+            //window.location.href=`/end/${id}`
         }
         else{
-            window.location.href=`/end/${id}`
+           // window.location.href=`/end/${id}`
         }
     }
 

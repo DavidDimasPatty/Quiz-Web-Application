@@ -8,7 +8,7 @@ const EndQuiz = () => {
     const [name, setName]=useState('');
     const history=useHistory();
     const {id}=useParams();
-
+    console.log( ReactSession.get("score"))
     const saveScore = async ()=>{
       
         await axios.post("http://localhost:5000/addscore",{
