@@ -14,7 +14,8 @@ const Category = () => {
     },[])
 
     const getAllCategory= async()=>{
-        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getcategory`).
+        const devEnv = process.env.NODE_ENV !== "production";
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getcategory`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

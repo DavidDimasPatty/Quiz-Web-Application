@@ -8,10 +8,10 @@ const EndQuiz = () => {
     const [name, setName]=useState('');
     const history=useHistory();
     const {id}=useParams();
-
+    const devEnv = process.env.NODE_ENV !== "production";
     const saveScore = async ()=>{
       
-        await axios.post(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/addscore`,{
+        await axios.post(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/addscore`,{
             name:name,
             score:0,
             time:Date.now(),
@@ -24,7 +24,7 @@ const EndQuiz = () => {
 
     const redirect = async ()=>{
       
-      await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getiduser`,{
+      await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getiduser`,{
           
       }).then((res)=>{
         console.log(res.data);

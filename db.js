@@ -1,6 +1,8 @@
+require('dotenv').config()
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
-var stringcon='mongodb+srv://i18040:wearedead@cluster0.hw29l.mongodb.net/?retryWrites=true&w=majority'
+
+var stringcon=`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PW_DB}@cluster0.hw29l.mongodb.net/?retryWrites=true&w=majority`
 const conn = mongoose.createConnection(stringcon);
 const connect = async (e)=>{ 
 await mongoose.connect(stringcon,{

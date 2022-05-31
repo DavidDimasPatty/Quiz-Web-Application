@@ -10,9 +10,9 @@ const QuizList = () => {
     useEffect(()=>{
         getAllQuiz();
     },[])
-
+    const devEnv = process.env.NODE_ENV !== "production";
     const deleteQuiz= async(id)=>{
-        await axios.delete(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/delete`,{
+        await axios.delete(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/delete`,{
                data:{ 
                    id:id
                 },
@@ -20,7 +20,7 @@ const QuizList = () => {
     }
 
     const getAllQuiz= async()=>{
-        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/get`).
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/get`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

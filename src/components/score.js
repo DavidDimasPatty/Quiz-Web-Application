@@ -10,15 +10,9 @@ const Score = () => {
     useEffect(()=>{
         getAllScore();
     },[])
-
-    const deleteQuiz= async(id)=>{
-        await axios.delete(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/delete`,{
-               data:{ 
-                   id:id
-                },
-         }).then( window.location.href="/admin")
-    }
-
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL, REACT_APP_PROD_URL} = process.env;
+    console.log(process.env)
     const getAllScore= async()=>{
         await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getscore`).
         then((res)=>{

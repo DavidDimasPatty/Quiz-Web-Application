@@ -10,6 +10,7 @@ const Play= () => {
     const history = useHistory();
     const {id,idus,ques}=useParams();
     var scoreFinal=0;
+    const devEnv = process.env.NODE_ENV !== "production";
     useEffect(()=>{
         checkTenQuiz();
         redirect();
@@ -24,7 +25,7 @@ const Play= () => {
 
  
     const getIdQuiz= async()=>{
-        await axios.get(`http://localhost:5000/getquizc`,{
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getquizc`,{
             params:{
                 idc:id,
                 q:ques
@@ -42,7 +43,7 @@ const Play= () => {
     
     const redirect = async ()=>{
       
-        await axios.get("http://localhost:5000/getiduser",{
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getiduser`,{
             
         }).then((res)=>{
           setScore(res.data[0].score)
@@ -52,7 +53,7 @@ const Play= () => {
 
     const UpdateScore = async (e)=>{
      
-        await axios.patch(`http://localhost:5000/updatescore`,{
+        await axios.patch(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/updatescore`,{
         
             data:{
                 id:idus,

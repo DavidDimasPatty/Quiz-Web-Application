@@ -14,10 +14,10 @@ const EditQuiz = () => {
     const [category2, setCategory2]=useState("");
     const history=useHistory();
     const {id}=useParams();
-
     const UpdateQuiz = async (e)=>{
+        const devEnv = process.env.NODE_ENV !== "production";
         e.preventDefault();
-        await axios.patch(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}update`,{
+        await axios.patch(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}update`,{
         
             data:{
                 id:id,
@@ -39,7 +39,8 @@ const EditQuiz = () => {
 
     const getIdQuiz = async ()=>{
         console.log(id)
-        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getid`,{
+        const devEnv = process.env.NODE_ENV !== "production";
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getid`,{
             params:{
                 id:id
             }
@@ -56,7 +57,8 @@ const EditQuiz = () => {
     }
 
     const getAllCategory= async()=>{
-        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getallcategory`).
+        const devEnv = process.env.NODE_ENV !== "production";
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getallcategory`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

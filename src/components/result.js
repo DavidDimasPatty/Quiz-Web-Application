@@ -11,10 +11,10 @@ const Result= () => {
     useEffect(()=>{
        getScore()
     },[])
-
+    const devEnv = process.env.NODE_ENV !== "production";
     const getScore = async (e)=>{
      
-        await axios.get(`http://localhost:5000/getscoreuser`,{
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getscoreuser`,{
         
             params:{
                 id:idus

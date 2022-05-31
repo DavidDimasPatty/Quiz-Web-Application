@@ -16,8 +16,8 @@ const AddQuiz = () => {
         getAllCategory();
     },[])
     const saveQuiz = async ()=>{
-      
-        await axios.post(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/add`,{
+        const devEnv = process.env.NODE_ENV !== "production";
+        await axios.post(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/add`,{
             question:question,
             option1:option1,
             option2:option2,
@@ -29,7 +29,8 @@ const AddQuiz = () => {
     }
 
     const getAllCategory= async()=>{
-        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getallcategory`).
+        const devEnv = process.env.NODE_ENV !== "production";
+        await axios.get(`${devEnv  ? process.env.REACT_APP_DEV_URL : process.env.REACT_APP_PROD_URL}/getallcategory`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){
