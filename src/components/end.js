@@ -11,7 +11,7 @@ const EndQuiz = () => {
 
     const saveScore = async ()=>{
       
-        await axios.post("http://localhost:5000/addscore",{
+        await axios.post(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/addscore`,{
             name:name,
             score:0,
             time:Date.now(),
@@ -24,10 +24,10 @@ const EndQuiz = () => {
 
     const redirect = async ()=>{
       
-      await axios.get("http://localhost:5000/getiduser",{
+      await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getiduser`,{
           
       }).then((res)=>{
-        console.log(res.data[0]._id);
+        console.log(res.data);
         window.location.href=`/play/${id}/${res.data[0]._id}/1`
       })  
           

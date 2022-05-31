@@ -12,7 +12,7 @@ const Score = () => {
     },[])
 
     const deleteQuiz= async(id)=>{
-        await axios.delete(`http://localhost:5000/delete`,{
+        await axios.delete(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/delete`,{
                data:{ 
                    id:id
                 },
@@ -20,7 +20,7 @@ const Score = () => {
     }
 
     const getAllScore= async()=>{
-        await axios.get('http://localhost:5000/getscore').
+        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getscore`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

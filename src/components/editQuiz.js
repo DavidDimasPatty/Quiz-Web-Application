@@ -17,7 +17,7 @@ const EditQuiz = () => {
 
     const UpdateQuiz = async (e)=>{
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/update`,{
+        await axios.patch(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}update`,{
         
             data:{
                 id:id,
@@ -39,7 +39,7 @@ const EditQuiz = () => {
 
     const getIdQuiz = async ()=>{
         console.log(id)
-        await axios.get(`http://localhost:5000/getid`,{
+        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getid`,{
             params:{
                 id:id
             }
@@ -56,7 +56,7 @@ const EditQuiz = () => {
     }
 
     const getAllCategory= async()=>{
-        await axios.get('http://localhost:5000/getallcategory').
+        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getallcategory`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

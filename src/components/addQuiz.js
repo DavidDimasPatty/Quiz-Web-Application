@@ -17,7 +17,7 @@ const AddQuiz = () => {
     },[])
     const saveQuiz = async ()=>{
       
-        await axios.post("http://localhost:5000/add",{
+        await axios.post(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/add`,{
             question:question,
             option1:option1,
             option2:option2,
@@ -29,7 +29,7 @@ const AddQuiz = () => {
     }
 
     const getAllCategory= async()=>{
-        await axios.get('http://localhost:5000/getallcategory').
+        await axios.get(`${devEnv  ? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/getallcategory`).
         then((res)=>{
              console.log(res.data)
              if (res.data.length!=0){

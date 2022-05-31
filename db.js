@@ -66,8 +66,8 @@ async function getAllCategory(){
 async function getIdUser(){
     var arr=[]
      await score.find().sort({ _id: -1 }).limit(1).then((res)=>{
-        
         arr=res;
+        console.log(res)
     }).catch((e)=>{
         console.log(e)
     })
