@@ -29,6 +29,8 @@ const Score = () => {
   
     return (
       <div>    
+        <Link to="/" className='button is-primary mt-2'>Back To Home</Link>
+        <table className='table is-stripped is-fullwidth'></table>
         <table className='table is-stripped is-fullwidth'>
             <thead>
                 <tr>
