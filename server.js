@@ -17,51 +17,51 @@ require('dotenv').config()
 dbm.connect()
 
 //router
-app.get('/get',function(req,res){
+app.get('/api/get',function(req,res){
 console.log("panggil");
 dbm.getQuiz().then((result)=>{
     res.send(result)
 })
 })
 
-app.get('/getallcategory',function(req,res){
+app.get('/api/getallcategory',function(req,res){
   console.log("panggil");
   dbm.getAllCategory().then((result)=>{
       res.send(result)
   })
   })
 
-app.get('/getiduser',function(req,res){
+app.get('/api/getiduser',function(req,res){
     console.log("panggil");
     dbm.getIdUser().then((result)=>{
         res.send(result)
     })
     }) 
   
-app.post('/add',function(req,res){
+app.post('/api/add',function(req,res){
   dbm.addQuiz(req)
 })
 
-app.post('/addscore',function(req,res){
+app.post('/api/addscore',function(req,res){
   dbm.addScore(req)
 })
 
-app.delete('/delete',function(req,res){
+app.delete('/api/delete',function(req,res){
      console.log(req.body.id)
     dbm.deleteQuiz(req.body.id)
   })
  
-app.patch('/update',function(req,res){
+app.patch('/api/update',function(req,res){
     console.log(req.body.data)
    dbm.updateQuiz(req.body.data)
  })
 
- app.patch('/updatescore',function(req,res){
+ app.patch('/api/updatescore',function(req,res){
   console.log(req.body.data)
  dbm.updateScore(req.body.data)
 })
 
-app.get('/getid',function(req,res){
+app.get('/api/getid',function(req,res){
     console.log("panggil");
     console.log(req.query)
     dbm.getOneQuiz(req.query.id).then((result)=>{
@@ -70,7 +70,7 @@ app.get('/getid',function(req,res){
     })
 
     
-app.get('/getquizc',function(req,res){
+app.get('/api/getquizc',function(req,res){
      
       dbm.getOneQuizCategory(req.query).then((result)=>{
          console.log(result)
@@ -78,7 +78,7 @@ app.get('/getquizc',function(req,res){
       })
 })
 
-app.get('/getscoreuser',function(req,res){
+app.get('/api/getscoreuser',function(req,res){
      
   dbm.getScoreUser(req.query).then((result)=>{
      console.log(result)
@@ -86,14 +86,14 @@ app.get('/getscoreuser',function(req,res){
   })
 })
 
-app.get('/getscore',function(req,res){
+app.get('/api/getscore',function(req,res){
       console.log("panggil");
       dbm.getScore().then((result)=>{
           res.send(result)
       })
 })
 
-app.get('/getcategory',function(req,res){
+app.get('/api/getcategory',function(req,res){
   console.log("panggil");
   dbm.getCategory().then((result)=>{
       res.send(result)
