@@ -101,9 +101,7 @@ app.get('/api/getcategory',function(req,res){
 })
 
 //Rate Limiting
-app.set('trust proxy', 1)
 // Set static folder
-app.use(express.static('public'))
 //routes
 
 // Enable cors
