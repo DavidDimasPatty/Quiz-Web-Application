@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const dbm=require('./db')
-const db = require('./db')
+const path = require('path')
 var CircularJSON = require('circular-json');
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 5000
@@ -107,7 +107,15 @@ app.use(express.static('public'))
 //routes
 
 // Enable cors
+if(process.env.NODE_ENV === 'production') {
 
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+
+  });
+}
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
